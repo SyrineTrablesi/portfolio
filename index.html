@@ -14,6 +14,8 @@
 /* ============================================================
    1. JETONS DE DESIGN — THÈME SOMBRE (par défaut)
    ============================================================ */
+
+   
 :root{
   --encre:#0B1020;
   --nuit:#111930;
@@ -795,8 +797,8 @@ Je m’intéresse particulièrement à l’architecture logicielle, au Cloud, au
 </section>
 
 <div class="filet"></div>
-
-<!-- <section id="contact">
+<!-- 
+ <section id="contact">
   <h2 class="titre-section">Contact</h2>
   <p class="intro-section">Un poste, une mission, une question sur un projet&nbsp;? Choisissez le moyen le plus simple pour vous&nbsp;: je réponds sous 24&nbsp;h.</p>
 
@@ -837,7 +839,7 @@ Je m’intéresse particulièrement à l’architecture logicielle, au Cloud, au
       <div class="cc-actions"><a class="lien-fichier" href="https://github.com/SyrineTrablesi" target="_blank" rel="noopener">Voir le code <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
     </div>
   </div>
-</section> -->
+</section>  -->
 
 <div class="filet"></div>
 
@@ -959,7 +961,7 @@ const DOSSIER_MEDIAS = 'medias/';
    ================================================================= */
 const DOSSIERS = [
   {
-    id:'tss-ia', type:'experience', encours:false,
+    id:'tss-ia', type:'experience',
     titre:'Développeuse full-stack & DevOps',
     structure:'Tunisys', lieu:'Tunis', debut:'Jan. 2026', fin:'Juil. 2026',
     resume:"Évolution de TSS, la plateforme web et mobile de gestion des interventions DAB/ATM : nouvelles fonctionnalités métier, assistant IA documentaire et industrialisation complète du déploiement.",
@@ -1686,6 +1688,155 @@ COMMANDES.push({t:'sudo hire syrine',k:'action',a:lancerHire});
 /* email qui s'écrit à l'arrivée dans la section contact */
 new IntersectionObserver((es,o) => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vu'); o.disconnect(); } }), {threshold:.4})
   .observe(document.querySelector('.contact-principal'));
+</script>
+<script>
+/* extras.js — traduction FR/EN/AR + sections Services et bandeau techno */
+(() => {
+const $ = (s, r = document) => r.querySelector(s);
+const html = document.documentElement;
+
+/* ---------- 1. DICTIONNAIRE  « français » : [anglais, arabe] ---------- */
+const D = {
+'Profil':['Profile','الملف'],'Parcours':['Journey','المسار'],'Projets':['Projects','المشاريع'],
+'Compétences':['Skills','المهارات'],'Contact':['Contact','تواصل'],'Terminal':['Terminal','الطرفية'],
+'Services':['Services','الخدمات'],'Expérience':['Experience','الخبرة'],'Pipeline':['Pipeline','خط النشر'],
+'Certifications':['Certifications','الشهادات'],
+'Ouverte aux opportunités — Tunis ou à distance':['Open to opportunities — Tunis or remote','متاحة للفرص — تونس أو عن بُعد'],
+'Ingénieure en informatique —':['Software engineer —','مهندسة معلوميات —'],
+'Je conçois des plateformes web et mobiles de bout en bout, de l’idée jusqu’à la mise en production. Je m’intéresse particulièrement à l’architecture logicielle, au Cloud, au DevOps et à la création de solutions fiables, évolutives et concrètes.':
+ ['I design web and mobile platforms end to end, from the idea to production. I am especially interested in software architecture, Cloud, DevOps and building reliable, scalable, practical solutions.','أصمّم منصات الويب والهاتف المحمول من الفكرة حتى الإنتاج. يهمّني خصوصاً تصميم البرمجيات والسحابة وDevOps وبناء حلول موثوقة وقابلة للتطوير.'],
+'Voir mon travail':['See my work','اطّلع على أعمالي'],'Télécharger le CV':['Download CV','تحميل السيرة الذاتية'],
+'Poste actuel':['Current role','المنصب الحالي'],
+'Ce que je fais, et d\'où ça vient.':['What I do, and where it comes from.','ماذا أفعل ومن أين أتيت.'],
+'Mention Excellent':['Excellent honours','تقدير ممتاز'],
+'missions professionnelles':['professional assignments','مهام مهنية'],'projets d\'ingénierie':['engineering projects','مشاريع هندسية'],
+'certifications':['certifications','شهادات'],'technologies maîtrisées':['technologies mastered','تقنيات متقنة'],
+'Rejouer la pipeline':['Replay the pipeline','أعد تشغيل خط النشر'],
+'Versionnage et revue':['Versioning and review','إدارة الإصدارات والمراجعة'],'Images conteneurisées':['Containerised images','صور حاويات'],
+'Qualité et sécurité':['Quality and security','الجودة والأمان'],'Orchestration':['Orchestration','التنسيق'],'Supervision continue':['Continuous monitoring','مراقبة مستمرة'],
+'Chaque mission ouvre une fiche : le détail des livrables et, quand ils existent, le rapport feuilletable et la vidéo de démonstration.':
+ ['Each assignment opens a sheet: deliverables in detail and, when available, the report and a demo video.','كل مهمة تفتح بطاقة فيها تفاصيل الإنجازات، وعند توفرها التقرير وفيديو العرض.'],
+'Projets d\'ingénierie menés à ESPRIT, de l\'infrastructure jusqu\'à l\'application.':['Engineering projects at ESPRIT, from infrastructure to application.','مشاريع هندسية أنجزتها في إسبريت، من البنية التحتية إلى التطبيق.'],
+'Les outils que j\'utilise réellement en projet. Cliquez sur une techno pour voir où je l\'ai utilisée.':['The tools I actually use on projects. Click a technology to see where I used it.','الأدوات التي أستخدمها فعلياً في المشاريع. انقر على تقنية لترى أين استعملتها.'],
+'Ouvrir la fiche':['Open sheet','افتح البطاقة'],
+'Développeuse full-stack & DevOps':['Full-stack & DevOps developer','مطوّرة Full-Stack و DevOps'],
+'Développeuse web & mobile':['Web & mobile developer','مطوّرة ويب وهاتف'],'Développeuse web front-end':['Front-end web developer','مطوّرة واجهات ويب'],
+'Plateforme cloud agricole':['Agricultural cloud platform','منصة سحابية فلاحية'],'Plateforme e-learning multi-supports':['Multi-platform e-learning','منصة تعلّم إلكتروني متعددة الأجهزة'],
+'Un poste, une mission, une question sur un projet ? Choisissez le moyen le plus simple pour vous : je réponds sous 24 h.':['A job, an assignment, a question? Pick the easiest way for you: I reply within 24 h.','وظيفة، مهمة أو سؤال؟ اختاروا الطريقة الأسهل، أرد خلال 24 ساعة.'],
+'Disponible maintenant · réponse sous 24 h':['Available now · reply within 24 h','متاحة الآن · رد خلال 24 ساعة'],
+'Le plus direct':['Most direct','الأسرع'],'Écrivez-moi par email':['Write me an email','راسلوني بالبريد'],
+'Écrire un email':['Send an email','أرسل بريداً'],'Copier l\'adresse':['Copy address','انسخ العنوان'],
+'Réponse sous 24 h':['Reply within 24 h','رد خلال 24 ساعة'],'Du lundi au vendredi':['Monday to Friday','من الاثنين إلى الجمعة'],
+'Sur place ou à distance':['On site or remote','حضورياً أو عن بُعد'],'Tunis ou en télétravail':['Tunis or remote work','تونس أو عن بُعد'],
+'Ou choisissez un autre moyen':['Or choose another way','أو اختاروا وسيلة أخرى'],
+'Téléphone':['Phone','الهاتف'],'Appeler':['Call','اتصال'],'Copier':['Copy','نسخ'],'Voir le profil':['View profile','عرض الملف'],'Voir le code':['View code','عرض الكود'],
+'Une autre façon de me découvrir. Tapez help, ou cliquez sur une commande.':['Another way to get to know me. Type help, or click a command.','طريقة أخرى للتعرف عليّ. اكتبوا help أو انقروا على أمر.'],
+'Ce que je peux faire pour vous':['What I can do for you','ما يمكنني تقديمه لكم'],
+'Quatre façons de travailler ensemble, tirées de mes missions réelles.':['Four ways to work together, drawn from my real assignments.','أربع طرق للتعاون، مستمدة من مهامي الفعلية.'],
+'Applications web & mobiles':['Web & mobile apps','تطبيقات ويب وهاتف'],
+'Plateformes React, Node.js et Flutter, de la maquette à la production.':['React, Node.js and Flutter platforms, from mockup to production.','منصات React وNode.js وFlutter من التصميم إلى الإنتاج.'],
+'Cloud & DevOps':['Cloud & DevOps','السحابة و DevOps'],
+'Docker, Kubernetes, OpenStack et pipelines CI/CD Jenkins.':['Docker, Kubernetes, OpenStack and Jenkins CI/CD pipelines.','Docker وKubernetes وOpenStack وخطوط CI/CD عبر Jenkins.'],
+'Assistants IA locaux':['Local AI assistants','مساعدات ذكاء اصطناعي محلية'],
+'Ollama / Llama 3 : vos documents restent chez vous.':['Ollama / Llama 3: your documents stay in-house.','Ollama / Llama 3: وثائقكم تبقى داخل مؤسستكم.'],
+'API & supervision':['APIs & monitoring','واجهات API ومراقبة'],
+'API REST, tableaux de bord temps réel, Prometheus et Grafana.':['REST APIs, real-time dashboards, Prometheus and Grafana.','واجهات REST ولوحات متابعة آنية وPrometheus وGrafana.'],
+};
+/* résumés des fiches (champ « resume » de DOSSIERS) */
+const R = {
+'tss-ia':['Evolution of TSS, the web and mobile ATM intervention platform: new features, a document AI assistant and fully industrialised deployment.','تطوير TSS، منصة الويب والهاتف لإدارة تدخلات الصرّافات الآلية: ميزات جديدة، مساعد ذكاء اصطناعي للوثائق ونشر مؤتمت بالكامل.'],
+'supervision-atm':['Remote ATM monitoring solution for secure access to data and images stored on the machines.','حل لمراقبة الصرّافات الآلية عن بُعد مع وصول آمن إلى البيانات والصور المخزنة.'],
+'gestion-services':['Internal service management solution and a mobile app dedicated to monitoring the ATM fleet.','حل داخلي لإدارة الخدمات وتطبيق هاتف مخصص لمتابعة أسطول الصرّافات.'],
+'superverse':['Marketing games web platform letting brands create, customise and manage interactive campaigns.','منصة ويب للألعاب التسويقية تتيح للعلامات إنشاء حملات تفاعلية وتخصيصها وإدارتها.'],
+'farmmate':['Private cloud infrastructure and full-stack app for farm monitoring, from the virtual machine to the interface.','بنية سحابية خاصة وتطبيق متكامل لمتابعة المزارع، من الآلة الافتراضية إلى الواجهة.'],
+'studyland':['Online course platform on web, mobile and desktop, sharing one database and services.','منصة دورات عبر الإنترنت على الويب والهاتف وسطح المكتب بقاعدة بيانات وخدمات مشتركة.']
+};
+if (typeof DOSSIERS !== 'undefined') DOSSIERS.forEach(d => { if (R[d.id]) D[d.resume.replace(/\s+/g,' ').trim()] = R[d.id]; });
+
+/* ---------- 2. STYLE ---------- */
+const lk = document.createElement('link'); lk.rel = 'stylesheet';
+lk.href = 'https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300..700&display=swap'; document.head.appendChild(lk);
+const st = document.createElement('style'); st.textContent = `
+.lang{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--trait);border-radius:999px;background:rgba(128,140,180,.1)}
+.lang button{font:500 .72rem var(--mono);cursor:pointer;border:0;background:none;color:var(--brume);padding:.35rem .6rem;border-radius:999px;transition:.25s}
+.lang button.on{background:var(--iris);color:#fff}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+.svc article{position:relative;padding:1.6rem;border:1px solid var(--trait);border-radius:var(--r-l);background:var(--carte);transition:transform .3s,border-color .3s;overflow:hidden}
+.svc article:hover{transform:translateY(-6px) rotate(-.4deg);border-color:var(--iris)}
+.svc article::before{content:attr(data-n);position:absolute;right:1rem;top:.4rem;font:400 3.4rem var(--display);color:transparent;-webkit-text-stroke:1px var(--trait-fort)}
+.svc .em{font-size:1.7rem;display:block;margin-bottom:.8rem}
+.svc h3{font-size:1.25rem;margin-bottom:.5rem}.svc p{color:var(--brume);font-size:.92rem}
+.defile{overflow:hidden;border-block:1px solid var(--trait);padding:1.1rem 0;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.defile div{display:flex;gap:2.4rem;width:max-content;animation:defile 38s linear infinite}
+.defile:hover div{animation-play-state:paused}
+.defile span{font:500 1.1rem var(--mono);color:var(--brume);white-space:nowrap}
+.defile span::before{content:'✦';color:var(--iris);margin-inline-end:.8rem}
+@keyframes defile{to{transform:translateX(-50%)}}
+[lang=ar]{--texte:'Noto Kufi Arabic','Inter',sans-serif;--display:'Noto Kufi Arabic','Fraunces',serif}
+[lang=ar] h1,[lang=ar] h2,[lang=ar] h3{letter-spacing:0;line-height:1.3}
+[dir=rtl] .hero .role{border-left:0;padding-left:0;border-right:2px solid var(--iris);padding-right:1rem}
+[dir=rtl] .quand{text-align:left}
+[dir=rtl] .faits li,[dir=rtl] .fiche-infos li{padding-left:0;padding-right:1.3rem}
+[dir=rtl] .faits li::before,[dir=rtl] .fiche-infos li::before{left:auto;right:0}
+[dir=rtl] .vignette{left:auto;right:-14%}
+[dir=rtl] .term,[dir=rtl] .cp-mail,[dir=rtl] .tech,[dir=rtl] .cc-val{direction:ltr}
+@media(prefers-reduced-motion:reduce){.defile div{animation:none}}`;
+document.head.appendChild(st);
+
+/* ---------- 3. NOUVELLES SECTIONS ---------- */
+const term = $('#terminal');
+if (term) {
+  const sv = [['🧩','Applications web & mobiles','Plateformes React, Node.js et Flutter, de la maquette à la production.'],
+    ['☁️','Cloud & DevOps','Docker, Kubernetes, OpenStack et pipelines CI/CD Jenkins.'],
+    ['🤖','Assistants IA locaux','Ollama / Llama 3 : vos documents restent chez vous.'],
+    ['📡','API & supervision','API REST, tableaux de bord temps réel, Prometheus et Grafana.']];
+  const s = document.createElement('section'); s.id = 'services';
+  s.innerHTML = '<h2 class="titre-section">Ce que je peux faire pour vous</h2><p class="intro-section">Quatre façons de travailler ensemble, tirées de mes missions réelles.</p><div class="svc">' +
+    sv.map((x, i) => `<article data-n="0${i + 1}"><span class="em">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join('') + '</div>';
+  const techs = [...document.querySelectorAll('.famille .tech')].map(t => t.textContent);
+  const m = document.createElement('div'); m.className = 'defile'; m.setAttribute('aria-hidden', 'true');
+  const row = techs.map(t => `<span>${t}</span>`).join('');
+  m.innerHTML = `<div>${row}${row}</div>`;
+  const f = term.previousElementSibling;
+  (f || term).before(s, m);
+}
+
+/* ---------- 4. TRADUCTION ---------- */
+const orig = new WeakMap(); let lang = 'fr';
+const MOTS_FR = typeof MOTS !== 'undefined' ? [...MOTS] : null;
+const MOTS_L = { en: ['full-stack development', 'Cloud & DevOps', 'Flutter mobile apps', 'local AI assistants'],
+                 ar: ['تطوير Full-Stack', 'السحابة وDevOps', 'تطبيقات Flutter', 'مساعدات ذكاء اصطناعي محلية'] };
+function tr(root = document.body) {
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n;
+  while ((n = w.nextNode())) {
+    const p = n.parentNode; if (!p || /SCRIPT|STYLE/.test(p.nodeName) || p.id === 'machine' || p.closest('.term,.lang')) continue;
+    if (!orig.has(n)) { const k = n.nodeValue.replace(/\s+/g, ' ').trim(); orig.set(n, D[k] ? [n.nodeValue, k] : null); }
+    const o = orig.get(n); if (!o) continue;
+    n.nodeValue = lang === 'fr' ? o[0] : o[0].replace(/\S[\s\S]*\S|\S/, D[o[1]][lang === 'en' ? 0 : 1]);
+  }
+}
+function setLang(l) {
+  lang = l; html.lang = l; html.dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.l === l));
+  if (MOTS_FR) MOTS.splice(0, MOTS.length, ...(l === 'fr' ? MOTS_FR : MOTS_L[l]));
+  tr();
+  try { localStorage.setItem('lang', l); } catch (e) {}
+}
+const sw = document.createElement('div'); sw.className = 'lang'; sw.setAttribute('aria-label', 'Langue');
+sw.innerHTML = '<button data-l="fr">FR</button><button data-l="en">EN</button><button data-l="ar">عربي</button>';
+sw.onclick = e => { const b = e.target.closest('button'); if (b) setLang(b.dataset.l); };
+const cible = $('.droite-entete'); if (cible) cible.insertBefore(sw, $('#ouvre-pal') || $('#theme'));
+
+/* les fiches s'ouvrent dynamiquement : on les retraduit */
+if (typeof ouvrirFiche === 'function') {
+  const o = ouvrirFiche;
+  ouvrirFiche = function (...a) { o.apply(this, a); tr($('#voile')); };
+}
+let saved = 'fr'; try { saved = localStorage.getItem('lang') || (navigator.language || 'fr').slice(0, 2); } catch (e) {}
+setLang(['fr', 'en', 'ar'].includes(saved) ? saved : 'fr');
+})();
+
+
 </script>
 </body>
 </html>
